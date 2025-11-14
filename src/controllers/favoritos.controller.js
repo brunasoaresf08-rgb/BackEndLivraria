@@ -60,3 +60,29 @@ export async function listarFavoritos(req, res) {
     res.status(500).json({ erro: "Erro ao excluir favorito", detalhes: error.message });
   }
 };
+
+export async function listarFavoritosPorUsuario(req, res) {
+  try {
+    const { id } = req.params;
+
+    const [rows] = await db.query(`
+      SELECT 
+        f.id AS favorito_id,
+        u.nome AS usuario,
+        l.titulo AS livro,
+        f.data_favoritado
+      FROM favoritos f
+      INNER JOIN usuarios u ON f.usuario_id = u.id
+      INNER JOIN livros l ON f.livro_id = l.id
+      WHERE f.usuario_id = ?
+    `, [id]);
+
+    if (rows.length === 0) {
+      return res.status(404).json({ mensagem: "Nenhum livro favoritado encontrado para este usuário." });
+    }
+
+    res.json(rows);
+  } catch (error) {
+    res.status(500).json({ erro: "Erro ao buscar favoritos", detalhes: error.message });
+  }
+};

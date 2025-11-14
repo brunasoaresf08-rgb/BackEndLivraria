@@ -1,11 +1,19 @@
+import {
+    criarAvaliacao,
+    listarAvaliacoes,
+    buscarAvaliacao,
+    atualizarAvaliacao,
+    deletarAvaliacao,
+} from "../controllers/avaliacoes.controller.js";
+
 import express from "express";
 
-const router = express.Router();
-import {criarAvaliacoes} from "../controllers/avaliacoes.controller.js"
-import {listarAvaliacoes} from "../controllers/avaliacoes.controller.js";
+const routes = express.Router();
+routes.get("/", listarAvaliacoes)
+routes.post("/", criarAvaliacao)
+routes.get("/:id", buscarAvaliacao)
+routes.put("/:id", atualizarAvaliacao)
+routes.delete("/:id", deletarAvaliacao)
 
-router.post('/', criarAvaliacoes);
-router.get('/', listarAvaliacoes);
-
-export default router;
+export default routes;
 

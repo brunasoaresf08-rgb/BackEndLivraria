@@ -7,6 +7,7 @@ import usuarioRoutes from "./routes/usuarios.routes.js";
 import livrosRoutes from "./routes/livros.routes.js";
 import avaliacoesRoutes from "./routes/avaliacoes.routes.js";
 import favoritosRoutes from "./routes/favoritos.routes.js";
+import reservasRoutes from "./routes/reservas.routes.js";
 
 // ============================
 //  Configuração do servidor
@@ -23,6 +24,7 @@ app.use("/usuarios", usuarioRoutes);
 app.use("/livros", livrosRoutes);
 app.use("/avaliacoes", avaliacoesRoutes);
 app.use("/favoritos", favoritosRoutes); 
+app.use("/reservas", reservasRoutes);
 
 const PORT = 3000;
 app.listen(PORT, () => console.log(`🚀 Servidor rodando na porta ${PORT}`));
